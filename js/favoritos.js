@@ -26,6 +26,24 @@ const borrarUnaImagen = ()=>{
 
     borrar.forEach(el => {
         el.addEventListener("click", (event)=>{
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1800,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'info',
+                title: 'Borraste imagen de favoritos'
+            })
+
             let svg = event.target;
             let divHijo = svg.parentNode;
             let img = divHijo.previousSibling;
@@ -42,6 +60,10 @@ const borrarUnaImagen = ()=>{
             divContenedor.remove();
             contadorFavoritos();
             guardarFavoritos();
+
+            if(arrayFavoritosImg.length === 0){
+                localStorage.clear();
+            }
         })
     });
 }
