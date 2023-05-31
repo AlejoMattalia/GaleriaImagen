@@ -94,6 +94,7 @@ const verMasImagenes = () => {
     verMas.addEventListener("click", async () => {
         await llamadoApi(categoria, "squarish", "regular");
         mostrarImagenes(arrayImagenes, iconoCorazon)
+        agregarImagenFavorito();
 
         const gridItem = document.querySelectorAll(".grid-item");
         const ultimasImagenes = Array.from(gridItem).slice(-12);
